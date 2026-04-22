@@ -26,7 +26,7 @@ def basic_clean(df: pd.DataFrame) -> pd.DataFrame:
     df = df.copy()
     df["datetime"] = pd.to_datetime(df["datetime"], errors="coerce")
 
-    df = df[df["is_total"] == False].copy()
+    df = df[not df["is_total"]].copy()
 
     df = df.dropna(subset=["datetime", "map_name", "bestOf", "team1_id", "team2_id", "team1_win"])
 
