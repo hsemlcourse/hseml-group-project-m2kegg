@@ -1,9 +1,7 @@
 [![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/kOqwghv0)
-# ML Project — [Название проекта]
+# ML Project - Прогноз победителя карты в CS2
 
-**Студент:** [ФИО / Student ID]
-
-**Группа:** [Группа]
+**Задача:** бинарная классификация - по карте профессионального матча CS2 предсказать, победит ли `team1`.
 
 
 ## Оглавление
@@ -18,17 +16,14 @@
 
 ## Описание задачи
 
-<!-- Кратко опишите задачу: что предсказываем, какой датасет, метрика качества -->
+**Задача:** бинарная классификация. Таргет — `team1_win ∈ {0,1}`, победит ли команда `team1` на конкретной карте матча CS2.
 
-**Задача:** [Классификация / Регрессия / Кластеризация / ...]
+**Датасет:** дамп профессиональных матчей CS2 (`cs2_all_tiers_games.csv`, 19 031 × 99). После фильтрации покарточных строк и очистки — 9 731 наблюдение за 2023-10 … 2026-04.
 
-**Датасет:** [Название и источник датасета]
-
-**Целевая метрика:** [Accuracy / F1 / RMSE / ...]
+**Целевая метрика:** **ROC-AUC** (основная), LogLoss (tie-breaker), Accuracy и F1-macro (вторичные). AUC выбран за устойчивость к лёгкому дисбалансу классов (53/47).
 
 
 ## Структура репозитория
-Опишите структуру проекта, сохранив при этом верхнеуровневые папки. Можно добавить новые при необходимости.
 ```
 .
 ├── data
@@ -38,7 +33,7 @@
 ├── notebooks
 │   ├── 01_eda.ipynb            # EDA
 │   ├── 02_baseline.ipynb       # Baseline-модель
-│   └── 03_experiments.ipynb    # Эксперименты и ablation study
+│   └── 03_experiments.ipynb    # Эксперименты
 ├── presentation                # Презентация для защиты
 ├── report
 │   ├── images                  # Изображения для отчёта
@@ -54,19 +49,15 @@
 
 ## Запуск
 
-Этот блок замените способом запуска вашего сервиса.
 ```bash
-# 1. Клонировать репозиторий
-git clone <url>
-cd <repo-name>
-
-# 2. Создать виртуальное окружение
+# Окружение
 python -m venv .venv
-source .venv/bin/activate   # Linux/macOS
-# .venv\Scripts\activate    # Windows
-
-# 3. Установить зависимости
+.venv\Scripts\activate        # Windows
+# source .venv/bin/activate   # Linux/macOS
 pip install -r requirements.txt
+
+# Пайплайн
+В процессе
 ```
 
 ## Данные
@@ -75,13 +66,19 @@ pip install -r requirements.txt
 
 
 ## Результаты
-Здесь коротко выпишите результаты.
-| Модель | [Метрика 1] | [Метрика 2] | Примечание |
-|--------|-------------|-------------|------------|
-| Baseline | — | — | |
-| Лучшая модель | — | — | |
+
+| Модель | ROC-AUC (val) | ROC-AUC (test) | Accuracy (test) | LogLoss (test) | Примечание |
+|---|---|---|---|---|---|
+| Baseline (LogReg, raw) | 0.508 | 0.500 | 0.541 | 0.690 | без feature engineering |
+| LogReg (FE) | 0.640 | — | — | — | C=0.01 |
+| KNN (FE) | 0.731 | — | — | — | n=31, distance |
+| Decision Tree (FE) | 0.736 | — | — | — | depth=8 |
+| Random Forest (FE) | 0.761 | — | — | — | depth=8, n=200 |
+| Gradient Boosting (FE)** | 0.766 | 0.706 | 0.652 | 0.615 | depth=4, lr=0.05, n=100 |
+
+Прирост лучшей модели над baseline: +0.21 ROC-AUC на test.
 
 
 ## Отчёт
 
-Финальный отчёт: [`report/report.md`](report/report.md)
+Финальный отчёт будет в: [`report/report.md`](report/report.md)

@@ -1,0 +1,90 @@
+{
+  "baseline": {
+    "name": "baseline_logreg_raw",
+    "val": {
+      "roc_auc": 0.50787491504946,
+      "accuracy": 0.5140507196710076,
+      "f1_macro": 0.46639894562270934,
+      "log_loss": 0.6917460401970823
+    },
+    "test": {
+      "roc_auc": 0.5002781760825925,
+      "accuracy": 0.5407813570939,
+      "f1_macro": 0.48633671316030636,
+      "log_loss": 0.6897736554204875
+    }
+  },
+  "experiments": [
+    {
+      "model": "logreg",
+      "best_params": {
+        "C": 0.01,
+        "penalty": "l2"
+      },
+      "cv_roc_auc": 0.622128913276633,
+      "val_roc_auc": 0.6396737899267537,
+      "val_accuracy": 0.5983550376970528,
+      "val_f1_macro": 0.5889231863989538,
+      "val_log_loss": 0.6611102005094623
+    },
+    {
+      "model": "knn",
+      "best_params": {
+        "n_neighbors": 31,
+        "weights": "distance"
+      },
+      "cv_roc_auc": 0.6769634347708927,
+      "val_roc_auc": 0.7314005512346146,
+      "val_accuracy": 0.6634681288553804,
+      "val_f1_macro": 0.6582667113807739,
+      "val_log_loss": 0.6084860461624219
+    },
+    {
+      "model": "decision_tree",
+      "best_params": {
+        "max_depth": 8,
+        "min_samples_leaf": 5
+      },
+      "cv_roc_auc": 0.6911279313512948,
+      "val_roc_auc": 0.73642112814317,
+      "val_accuracy": 0.6792323509252913,
+      "val_f1_macro": 0.6604668647739071,
+      "val_log_loss": 0.7174606231605151
+    },
+    {
+      "model": "random_forest",
+      "best_params": {
+        "max_depth": 8,
+        "min_samples_leaf": 1,
+        "n_estimators": 200
+      },
+      "cv_roc_auc": 0.7187643319377506,
+      "val_roc_auc": 0.7608132598353847,
+      "val_accuracy": 0.6874571624400274,
+      "val_f1_macro": 0.6725801689009626,
+      "val_log_loss": 0.5966017114100447
+    },
+    {
+      "model": "gbdt",
+      "best_params": {
+        "learning_rate": 0.05,
+        "max_depth": 4,
+        "n_estimators": 100
+      },
+      "cv_roc_auc": 0.7088582864586646,
+      "val_roc_auc": 0.7659763648720079,
+      "val_accuracy": 0.6997943797121315,
+      "val_f1_macro": 0.694559793518784,
+      "val_log_loss": 0.5846175993597199
+    }
+  ],
+  "best_on_test": {
+    "name": "gbdt",
+    "test": {
+      "roc_auc": 0.7061829652996845,
+      "accuracy": 0.6518163125428376,
+      "f1_macro": 0.6413707008341882,
+      "log_loss": 0.6154654470097813
+    }
+  }
+}
