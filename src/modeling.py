@@ -6,7 +6,7 @@ import joblib
 import numpy as np
 import pandas as pd
 from sklearn.compose import ColumnTransformer
-from sklearn.ensemble import GradientBoostingClassifier, RandomForestClassifier
+from sklearn.ensemble import GradientBoostingClassifier, RandomForestClassifier, VotingClassifier
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import (
     accuracy_score,
@@ -126,6 +126,19 @@ def experiment_space():
                 "clf__learning_rate": [0.05, 0.1],
             },
             False,
+        ),
+        (
+            "ensemble_voting",
+            VotingClassifier(
+                estimators=[
+                    ("lr", LogisticRegression(C=0.1, max_iter=1000, random_state=RANDOM_STATE)),
+                    ("rf", RandomForestClassifier(n_estimators=200, max_depth=8, random_state=RANDOM_STATE)),
+                    ("gbdt", GradientBoostingClassifier(n_estimators=100, max_depth=4, learning_rate=0.05, random_state=RANDOM_STATE))
+                ],
+                voting="soft"
+            ),
+            {},
+            True,
         ),
     ]
 

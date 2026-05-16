@@ -62,7 +62,7 @@
       "val_roc_auc": 0.7608132598353847,
       "val_accuracy": 0.6874571624400274,
       "val_f1_macro": 0.6725801689009626,
-      "val_log_loss": 0.5966017114100447
+      "val_log_loss": 0.5966017114100446
     },
     {
       "model": "gbdt",
@@ -76,6 +76,15 @@
       "val_accuracy": 0.6997943797121315,
       "val_f1_macro": 0.694559793518784,
       "val_log_loss": 0.5846175993597199
+    },
+    {
+      "model": "ensemble_voting",
+      "best_params": {},
+      "cv_roc_auc": 0.7038879604197709,
+      "val_roc_auc": 0.7529298497319339,
+      "val_accuracy": 0.6792323509252913,
+      "val_f1_macro": 0.6689608228709727,
+      "val_log_loss": 0.6074598244904605
     }
   ],
   "best_on_test": {
